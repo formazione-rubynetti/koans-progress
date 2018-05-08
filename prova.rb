@@ -3,7 +3,7 @@ class UmorismoSpicciolo
   @@parole_buffe = ["Simonini", "Tette", "Cacca"].map(&:downcase)
 
   def aggiungi_parola_buffa(parola)
-    @@parole_buffe.push(parola)
+    @parole_buffe += parola
   end
 
   def parola_buffa?(parola, force: false, add: false)
@@ -14,6 +14,13 @@ class UmorismoSpicciolo
     else
       return "buuu, #{parola} fai schifo"
     end
+  end
+
+  private
+
+  def parole_buffe
+    @parole_buffe += []
+    @@parole_buffe + @parole_buffe
   end
 
 end
