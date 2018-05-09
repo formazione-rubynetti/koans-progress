@@ -1,5 +1,5 @@
 class UmorismoSpicciolo
-
+  # Commento scritto su github
   @@parole_buffe = ["Simonini", "Tette", "Cacca"].map(&:downcase)
 
   def aggiungi_parola_buffa(parola)
