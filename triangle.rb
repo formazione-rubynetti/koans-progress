@@ -21,7 +21,16 @@ def isosceles?(a, b, c)
   a == b || b == c || a == c
 end
 
+def impossible?(a, b, c)
+  return true if [a, b, c].min <=0
+  return true if a + b <= c
+  return true if a + c <= b
+  return true if c + b <= a
+  return false
+end
+
 def triangle(a, b, c)
+  raise TriangleError, "Questo triangolo non è possibile" if impossible?(a, b, c)
   return :equilateral if equilateral?(a, b, c)
   return :isosceles if isosceles?(a, b, c)
   return :scalene
