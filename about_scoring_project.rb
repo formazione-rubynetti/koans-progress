@@ -25,12 +25,43 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # score([3,4,5,3,3]) => 350 points
 # score([1,5,1,2,4]) => 250 points
 #
-# More scoring examples are given in the tests below:
+# More scoring examples are given in the tests below:0
 #
 # Your goal is to write the score method.
 
+def search_tris(dice)
+  (1..6).each do |number|
+    occurencies = 0
+    dice.each do |die|
+      if die == number
+        occurencies += 1
+        return number if occurencies >= 3
+      end
+    end
+  end
+  return nil
+end
+
+def remove_tris(dice, tris)
+  3.times do
+    index = dice.find_index(tris)
+    dice.delete_at(index)
+  end
+  return dice
+end
+
 def score(dice)
   # You need to write this method
+  punteggio = 0
+  tris = search_tris(dice)
+  punteggio += 1000 if tris == 1
+  punteggio += tris*100 if (2..6).include?(tris)
+  dice = remove_tris(dice, tris) if tris
+  dice.each do |die|
+    punteggio += 100 if die == 1
+    punteggio += 50 if die == 5
+  end
+  return punteggio
 end
 
 class AboutScoringProject < Neo::Koan
