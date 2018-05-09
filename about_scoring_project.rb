@@ -31,13 +31,8 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def search_tris(dice)
   (1..6).each do |number|
-    occurencies = 0
-    dice.each do |die|
-      if die == number
-        occurencies += 1
-        return number if occurencies >= 3
-      end
-    end
+    occurencies = dice.count(number)
+    return number if occurencies >= 3
   end
   return nil
 end
