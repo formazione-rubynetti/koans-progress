@@ -6,25 +6,15 @@ class DiceSet
   def initialize
     @seed = Random.new
     @number_of_roll = 0
-    @result = [1, 2, 3, 4, 5]
-  end
-
-  def set_dice
-    @dice = [seed.rand(1..6)]
+    @result = []
   end
 
   def roll(number_of_dice)
-    if number_of_dice < @result.size
-      while number_of_dice < @result.size
-        @result.pop
-      end
-    else
-      while number_of_dice > @result.size
-        @result.push(@seed.rand(1..6))
-      end
+    @result = []
+    number_of_dice.times do
+      @result.push(@seed.rand(1..6))
     end
-
-    @result = @result.shuffle
+    @result
   end
 
   def values
