@@ -1,9 +1,7 @@
-class UmorismoSpicciolo
-  # Commento scritto su github
-  @@parole_buffe = ["simonini", "tette", "cacca"]
+class Umorismo
 
-  def initialize
-    @parole_buffe = @@parole_buffe
+  def initialize(parole_buffe)
+    @parole_buffe = parole_buffe
   end
 
   def parole_buffe
@@ -23,21 +21,29 @@ class UmorismoSpicciolo
       return "buuu, #{parola} fai schifo"
     end
   end
-
 end
 
-class UmorismoRaffinato < UmorismoSpicciolo
-  @@parole_buffe = ["alessandro descovi", "seni", "feci"]
+class UmorismoSpicciolo < Umorismo
+  def initialize(parole_buffe)
+    @parole_buffe = ["simonini", "tette", "cacca"] + parole_buffe
+  end
 end
 
-umorista = UmorismoRaffinato.new
-p umorista.parola_buffa?("Tette")
-p umorista.parola_buffa?("tette")
-p umorista.parola_buffa?("TEttE")
-p umorista.parola_buffa?("Tett")
-p umorista.parola_buffa?("Gino", add: true)
-p umorista.parola_buffa?("tristezza degli altri", force: true)
-p umorista.parola_buffa?("culo")
-p umorista.parola_buffa?("culo")
-p umorista.parola_buffa?("Gino")
-p umorista.parola_buffa?("Seni")
+class UmorismoRaffinato < Umorismo
+  def initialize(parole_buffe)
+    @parole_buffe = ["alessandro descovi", "seni", "feci"] + parole_buffe
+  end
+end
+
+umorista = Umorismo.new(["scimmia", "pupù"])
+p umorista.parola_buffa?("scimmia")
+p umorista.parola_buffa?("pupù")
+p umorista.parola_buffa?("procastinare")
+
+
+umorista_raffinato = UmorismoRaffinato.new
+umorista_spicciolo = UmorismoSpicciolo.new
+p umorista_raffinato.parola_buffa?("tette")
+p umorista_spicciolo.parola_buffa?("tette")
+p umorista_raffinato.parola_buffa?("feci")
+p umorista_spicciolo.parola_buffa?("feci")
